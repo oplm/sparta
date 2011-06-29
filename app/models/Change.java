@@ -22,7 +22,6 @@ import play.data.validation.Required;
 //@javax.persistence.Inheritance(strategy=InheritanceType.JOINED)
 @MappedSuperclass
 public abstract class Change extends ItemModel{
-
 	public String number;
 	
 	@Required

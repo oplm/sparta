@@ -25,8 +25,8 @@ import play.db.jpa.JPAPlugin;
 
 import play.mvc.With;
 
-//@With(Secure.class)
 
+@With(Secure.class)
 public class Users extends CoreController {
 	/**
 	 * get roles

@@ -4,6 +4,7 @@
 
 
 # Home
+POST     /users/parts/bomlevel                   Parts.bomlevel
 GET     /users/ecos/{id}/addtask                 ECOs.addTask
 GET     /users/ecrs/{id}/addtask                 ECRs.addTask
 POST    /users/ecrs/{id}/createtask              ECR.createTask

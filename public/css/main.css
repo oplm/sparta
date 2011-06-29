@@ -94,6 +94,7 @@ p {
     vertical-align:baseline;
 }
 
+.span-full {width:960px;margin-right:0;}
 textarea{
    height:auto;
    width:auto;
@@ -134,14 +135,25 @@ textarea{
 	background: #ffffff;
 	color: #333333;
 	margin: -20px auto;
-	padding-top: 20px;
 	max-width: 960px;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
 	   -moz-box-shadow: 0 0 0.3em #255b17;
 	-webkit-box-shadow: 0 0 0.3em #255b17;
 	        box-shadow: 0 0 0.3em #255b17;
    min-height: 530px;
-   z-index: -1 ;
+   
+
+}
+
+#navigation {
+	clear: both;
+   min-height:auto;
+   background-color: transparent;
+   min-width: inherit;
+   padding-top: 1px;
+  padding-left: 6px;
+  padding-right: 6px;
+   
 }
 .global-nav{
    clear:both;
@@ -171,7 +183,7 @@ textarea{
 
 #header{
    background-color:#002060;
-   height:60px;
+   height:55px;
    left:0;
    width:100%;
    z-index:-1;
@@ -294,23 +306,50 @@ h2 {
 	margin: 0 auto;
 }
 .content {
-    padding-left:5px;
+    padding:5px;
+}
+
+#filebrowser {
+	border-bottom: #fff 1px solid; border-left: #bbb 1px solid;
+	border-top: #bbb 1px solid; border-right: #fff 1px solid;
+	padding: 5px;	
+	width: 100%; background: #fff; height: 400px; 
+	overflow: scroll; 
 }
 .footer {
+	background:#F8F8F8 none repeat scroll 0 0;
+	color: #333333;
+	margin-top: -20px;
+	margin-bottom:20px;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 960px; 
    height:40px;
    left:0;
-   width:100%;
+   max-width:960px;
    z-index:-1;
    bottom: 0;
-   background:#F8F8F8 none repeat scroll 0 0;
    border-color:#DEDEDE;
    border-style:solid;
    border-width:1px 0;
    clear:both;
-   padding:15px 10px;
-   margin-top: 15px 15px;
+   margin-top: 25px !important;
+   overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
+	   -moz-box-shadow: 0 0 0.3em #255b17;
+	-webkit-box-shadow: 0 0 0.3em #255b17;
+	        box-shadow: 0 0 0.3em #255b17;
+	        border-bottom:2px solid #67A927;
 }
 
+#copyright{
+	float:right;
+	display:block;
+    line-height:1.4;
+    font-style: italic;
+    font-size:110%;
+    padding: 5px;
+    color:#333333;
+}
 .span-25{
 	width:100%;
 	float:center;

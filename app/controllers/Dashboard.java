@@ -24,8 +24,10 @@ import play.db.Model;
 import play.db.Model.BinaryField;
 import play.exceptions.UnexpectedException;
 import play.mvc.Before;
+import play.mvc.With;
 import play.mvc.Http.Request;
 
+@With(Secure.class)
 public class Dashboard extends CoreController {
 
 	/*

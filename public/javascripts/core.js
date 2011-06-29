@@ -17,9 +17,7 @@ $(document).ready(
 			$('#account-actions').menu({ 
 				content: $('#account-actions').next().html(), // grab content from this page
 				showSpeed: 100 
-			});
-
-				$( "#edit-tabs" ).tabs();
+			}); 		   
 			
 			// Actions defined
 			$(".action-delete").click(function(e) {

@@ -1,10 +1,5 @@
+#{set title:(object? object['displayName'] : null)/}
 #{extends 'core/layout.html' /}
-
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input.css'}" />
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input-sparta.css'}" />
-<script src="@{'/public/javascripts/jquery.tokeninput.js'}"></script>
-<script src="@{'/public/javascripts/ejohn-templating.js'}"></script>
-
 <div id="coreShow " class="${type.name}">
     <div class="listSort">
 	   &nbsp&nbsp &{'supplier.show.title', type.modelName} : ${object.displayName}

@@ -14,6 +14,7 @@ import controllers.Security;
 import controllers.ViewContexts;
 
 import play.data.validation.Email;
+import play.data.validation.Match;
 import play.data.validation.Max;
 import play.data.validation.MaxSize;
 import play.data.validation.Min;
@@ -38,6 +39,7 @@ public class User extends TemporalModel{
 	@Required
 	@MinSize(4)
 	@MaxSize(20)
+	@Match("[a-zA-Z][a-zA-Z_0-9]*")
 	public String username;
 	
 	@Email
