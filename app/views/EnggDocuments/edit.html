@@ -1,3 +1,4 @@
+#{set title:(object? object['displayName'] : null)/}
 #{extends 'core/layout.html' /}
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input.css'}" />
 <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input-sparta.css'}" />
@@ -30,7 +31,7 @@
 		#{sparta.field name:'description'/}
 		#{sparta.lookupField name:'subtype', realm:'sparta.engineering.doctypes'/}
 		#{sparta.field name:'project'/}
-		#{/sparta.form}
+		
 		</div>
 		<p class="coreButtons button">
 			<input type="submit" name="_save" value="&{'core.save', type.modelName}" />

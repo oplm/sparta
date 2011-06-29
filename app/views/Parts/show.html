@@ -1,13 +1,11 @@
+#{set 'moreScripts'}
+<script type="text/javascript" charset="utf-8" src="@{'/public/javascripts/bom.js'}"></script>
+#{/set}
+#{set 'moreStyles' }
+<link rel="stylesheet" type="text/css" media="screen, projection" href="@{'/public/css/bom.css'}" />
+#{/set}
+#{set title:(object? object['displayName'] : null)/}
 #{extends 'core/layout.html' /}
-
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input.css'}" />
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input-sparta.css'}" />
-
-<script src="@{'/public/javascripts/jquery.tokeninput.js'}"></script>
-<script src="@{'/public/javascripts/ejohn-templating.js'}"></script>
-
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/ui.jqgrid.css'}" />
-
 <div id="coreShow " class="${type.name}">
     <div class="listSort">
 	   &nbsp&nbsp &{'part.show.title', type.modelName} : ${object.identifier.number}-${object.identifier.tab}-${object.revision}-${object.iteration}
@@ -26,7 +24,7 @@
 	    <ul>
 		  <li><a href="#basic-info">&{'sparta.show.basicinfo'}</a></li>
 		  <li><a href="#edit-relations">&{'sparta.show.editrelations'}</a></li>	
-		  <li><a href="#bom">Bom</a></li>
+		  <li><a href="@{bom(object._key())}">Bom</a></li>
 		  <li><a href="@{versions(object._key())}">Versions</a></li>		
 	    </ul>
 	  <div id="basic-info" class="ui-widget">
@@ -114,11 +112,5 @@
 		Update the project to upload files.
 		#{/else}	    	
 	    </div >
-	   
-	    <div id="bom" >
-	  
-	    </div>
-
-    </div>
-   
+    </div>   
 </div>

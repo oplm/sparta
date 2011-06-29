@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.FilenameFilter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -9,6 +11,7 @@ import java.util.Set;
 
 import controllers.CoreController.For;
 import controllers.CoreController.ObjectType;
+import models.Bom;
 import models.Customer;
 import models.DesignDocumentVersion;
 import models.Document;
@@ -22,6 +25,7 @@ import models.PartStructure;
 import models.PartVersion;
 import models.Plant;
 import models.Project;
+import models.StructureTree;
 import models.Supplier;
 import models.UnitOfMeasure;
 import models.User;
@@ -163,18 +167,10 @@ public class Parts extends Products {
 		if(uom == null){
 			uom = DEFAULT_UOM;
 		}
-		String number = PartNumber.getPartNumber();
-		Part part = new Part(number);
-		part.servicePart = Boolean.parseBoolean(isServicePart);
-		part.uom = UnitOfMeasure.find("byCode", uom).first();		
-		part.save();		
-		if(part == null){
-			JPA.setRollbackOnly();
-			error(Messages.get("sparta.partidentifier.failedcreate"));
-		}
+		
 		PartVersion partVersion = new PartVersion();
 		Binder.bind(partVersion, "object", params.all());
-		partVersion.identifier = part;
+		
 		validation.valid(partVersion);
 		if (validation.hasErrors()) {
 			renderArgs.put("error", Messages.get("core.hasErrors"));
@@ -186,6 +182,17 @@ public class Parts extends Products {
 			}
 		}
 		
+		String number = PartNumber.getPartNumber();
+		Part part = new Part(number);
+		part.servicePart = Boolean.parseBoolean(isServicePart);
+		part.uom = UnitOfMeasure.find("byCode", uom).first();		
+		part.save();		
+		if(part == null){
+			JPA.setRollbackOnly();
+			error(Messages.get("sparta.partidentifier.failedcreate"));
+		}
+		
+		partVersion.identifier = part;
 		//String number = PartNumber.getPartNumber();
 		//Part part = new Part(number).save();
 		//partVersion.identifier = part;
@@ -530,5 +537,61 @@ public class Parts extends Products {
 	    
 	    List<PartVersion> objects = PartVersion.find("byIdentifier", identifier).fetch();
 	    render(type, objects);		
+	}
+	
+	public static void bom(Long id){		
+		ObjectType type = ObjectType.get(Parts.class);
+		notFoundIfNull(type);
+		PartVersion object = (PartVersion) type.findById(id);
+		notFoundIfNull(object);
+		StructureTree tree = new Bom(Bom.STRUCTURE_USES).get(object);	
+		
+		
+		render(tree);
+	}
+	
+	public static void bomlevel() throws UnsupportedEncodingException{
+		String dir = request.params.get("dir");
+		StringBuffer sb = new StringBuffer();
+		if(dir == null || "".equals(dir)){
+			dir="data/..";
+		}
+		String abcd = "<ul class=\"jqueryFileTree\" style=\"display: none;\"><li class=\"file ext_xml\"><a href=\"#\" rel=\"./jqgrid_demo/js/src/css/ellipsis-xbl.xml\">ellipsis-xbl.xml</a></li><li class=\"file ext_css\"><a href=\"#\" rel=\"./jqgrid_demo/js/src/css/jquery.searchFilter.css\">jquery.searchFilter.css</a></li><li class=\"file ext_css\"><a href=\"#\" rel=\"./jqgrid_demo/js/src/css/ui.jqgrid.css\">ui.jqgrid.css</a></li><li class=\"file ext_css\"><a href=\"#\" rel=\"./jqgrid_demo/js/src/css/ui.multiselect.css\">ui.multiselect.css</a></li></ul>";
+		if (dir.charAt(dir.length()-1) == '\\') {
+	    	dir = dir.substring(0, dir.length()-1) + "/";
+		} else if (dir.charAt(dir.length()-1) != '/') {
+		    dir += "/";
+		}
+		
+		dir = java.net.URLDecoder.decode(dir, "UTF-8");	
+		
+	    if (new java.io.File(dir).exists()) {
+			String[] files = new java.io.File(dir).list(new FilenameFilter() {
+			    public boolean accept(java.io.File dir, String name) {
+					return name.charAt(0) != '.';
+			    }
+			});
+			Arrays.sort(files, String.CASE_INSENSITIVE_ORDER);
+			sb.append("<ul class=\"jqueryFileTree\" style=\"display: none;\">");
+			// All dirs
+			for (String file : files) {
+			    if (new java.io.File(dir, file).isDirectory()) {
+			    	sb.append("<li class=\"directory collapsed\"><a href=\"#\" rel=\"" + dir + file + "/\">"
+						+ file + "</a></li>");
+			    }
+			}
+			// All files
+			for (String file : files) {
+			    if (!new java.io.File(dir, file).isDirectory()) {
+					int dotIndex = file.lastIndexOf('.');
+					String ext = dotIndex > 0 ? file.substring(dotIndex + 1) : "";
+					sb.append("<li class=\"file ext_" + ext + "\"><a href=\"#\" rel=\"" + dir + file + "\">"
+						+ file + "</a></li>");
+			    	}
+			}
+			sb.append("</ul>");
+	    }
+	    
+	    renderText(sb.toString());
 	}
 }

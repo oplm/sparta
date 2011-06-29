@@ -13,10 +13,10 @@
 
 
 <script>
-
+(function ($) {
 $("#${_name}-input").tokenInput('${_geturl}',  {
 	 preventDuplicates: true,
-    theme: "sparta"
+   theme: "sparta"
 });
 
 /** Insted of doBody add posturl**/
@@ -28,8 +28,8 @@ $('#save${_name}').click(function(e) {
 		$(updates).each(function() {
 			display${_name}(this);
 		});
-    },
-   "json"); 
+   },
+  "json"); 
 });
 
 $('#save${_name}').button();
@@ -37,4 +37,5 @@ $('#save${_name}').button();
 var display${_name} = function(updates) {
 	$('#rel-updates-${_name}').append(tmpl('${_name}_abcd', {updates: updates}));
 }
+}(jQuery));
 </script>

@@ -153,7 +153,3 @@ _Menu(eco):
     url: '@{ECOs.list()}'
     title: ECO
     parent: change_management
-
-_Menu(logout):
-    name: logout
-    url: /logout

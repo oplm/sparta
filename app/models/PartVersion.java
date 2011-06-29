@@ -50,7 +50,7 @@ public class PartVersion extends ProductVersion{
 	 * identifier not defined
 	 */
 	@ManyToOne(cascade=CascadeType.PERSIST, optional=false,targetEntity=Part.class)
-	public Part identifier;
+	@Valid public Part identifier;
 	
 	
 	public PartVersion(String name, Part identifier){
@@ -145,6 +145,10 @@ public class PartVersion extends ProductVersion{
 		return structures;
 	}
 	
+	public List<PartStructure> getUsedOnPartsStructures(){
+		List<PartStructure> structures = PartStructure.find(BY_USES_RELATION, this).fetch();				
+		return structures;
+	}
 	public List<PartVersion> getUsedOnParts(){
 		List<PartStructure> structures = PartStructure.find(BY_USES_RELATION, this).fetch();
 		List<PartVersion> parts = new ArrayList<PartVersion>();

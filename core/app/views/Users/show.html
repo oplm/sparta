@@ -1,9 +1,5 @@
+#{set title:(object? object['displayName'] : null)/}
 #{extends 'core/layout.html' /}
-
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input.css'}" />
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/css/token-input-sparta.css'}" />
-<script src="@{'/public/javascripts/jquery.tokeninput.js'}"></script>
-<script src="@{'/public/javascripts/ejohn-templating.js'}"></script>
 
 <div id="coreShow " class="${type.name}">
     <div class="listSort">
@@ -28,6 +24,8 @@
 	       </tr><tr>
 	          #{core.element name:"lastName", value:(object? object['lastName'] : null) /}
 	          #{core.element name:"active", value:(object? object['active'] : null) /}	
+	       </tr> <tr>
+	          #{core.element name:"email", value:(object? object['email'] : null) /}
 	       </tr><tr>
 	          #{core.element name:"dateCreated", value:(object? object['dateCreated'] : null) /}
 	          #{core.element name:"lastUpdated", value:(object? object['lastUpdated'] : null) /}

@@ -1,7 +1,9 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+
 main.title=Sparta
+application.copyright= © Copyright oplm.org 2011. All rights reserved.
 dateCreated=Date Created
 lastUpdated=Last Updated
 SpecDocuments=Specification Documents

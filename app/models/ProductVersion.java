@@ -22,7 +22,7 @@ public abstract class ProductVersion extends VersionModel {
 
 	@Required
 	@MaxSize(100)
-	@Match("[a-zA-Z][a-zA-Z_0-9()\\.]*")
+	@Match("[a-zA-Z][a-zA-Z_0-9() \\.]*")
 	public String name;
 
 	@Transient
